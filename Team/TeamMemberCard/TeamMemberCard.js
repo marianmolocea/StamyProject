@@ -2,7 +2,7 @@
 
 const cardTemplate = document.createElement('template');
 
-const buttonText = "See More"
+const buttonText = "see more"
 
 cardTemplate.innerHTML = `
     <style>
@@ -15,7 +15,7 @@ cardTemplate.innerHTML = `
             <div id="member-card-description-role"> // ROLE //</div>
             <div id="member-card-description-intro"> // SHORT INTRO //</div>
         </div>
-        <a href="#" id="member-card-button">${buttonText}</a>
+        <a href="#" id="member-card-button">${buttonText.toUpperCase()}</a>
     </div>
 `;
 
