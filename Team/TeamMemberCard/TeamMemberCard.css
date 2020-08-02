@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 
-.member-card-container {
+#member-card-container {
     position: relative;
     font-family: 'Montserrat', sans-serif;
     font-size: 16px;
@@ -19,7 +19,7 @@
     transition: color ease-in-out 300ms;
 }
 
-.member-card-container::before {
+#member-card-container::before {
     position: absolute;
     content: "";
     width: 100%;
@@ -29,7 +29,7 @@
     transition: top ease-in-out 300ms;
 }
   
-.member-card-container img {
+#member-card-container img {
     position: relative;
     margin-top: 20px;
     height: 180px;
@@ -40,7 +40,7 @@
     transition: border ease-in-out 300ms;
 }
 
-.member-card-description-container {
+#member-card-description-container {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -49,21 +49,21 @@
     padding: 20px;
 }
 
-.member-card-description-name {
+#member-card-description-name {
     position: relative;
     font-weight: 700;
     font-size: 1.1em;
     margin-bottom: 20px;
 }
 
-.member-card-description-role {
+#member-card-description-role {
     position: relative;
     font-weight: 500;
     padding-bottom: 20px;
     margin-bottom: 20px;
 }
 
-.member-card-description-role::after {
+#member-card-description-role::after {
     content: "";
     position: absolute;
     bottom: 0;
@@ -75,14 +75,13 @@
     transition: background-color ease-in-out 300ms;
 }
 
-.member-card-description-intro {
+#member-card-description-intro {
     font-size: 0.8em;
     font-weight: 300;
-    line-height: 18px;
     text-align: justify;
 }
 
-.member-card-button {
+#member-card-button {
     position: absolute;
     display: flex;
     justify-content: center;
@@ -101,22 +100,22 @@
     transition: border-top ease-in-out 300ms;
 }
 
-.member-card-container:hover {
+#member-card-container:hover {
     color: #fff
 }
 
-.member-card-container:hover::before {
+#member-card-container:hover::before {
     top: 0;
 }
 
-.member-card-container:hover img {
+#member-card-container:hover img {
     border: 10px solid #fff;
 }
 
-.member-card-container:hover .member-card-description-role::after {
+#member-card-container:hover #member-card-description-role::after {
     background-color: #fff;
 }
 
-.member-card-container:hover .member-card-button {
+#member-card-container:hover #member-card-button {
     border-top: 1px solid rgba(255, 255, 255, 0.3);
 }
