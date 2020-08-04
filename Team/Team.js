@@ -82,7 +82,7 @@ template.innerHTML = `
         max-width: 380px;
         max-height: 480px;
         min-width: 250px;
-        min-height: 350px;
+        min-height: 380px;
         border-radius: 5px;
         overflow: hidden;
         box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.15);
