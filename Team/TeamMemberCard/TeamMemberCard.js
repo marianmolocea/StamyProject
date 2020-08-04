@@ -12,10 +12,10 @@ cardTemplate.innerHTML = `
         <img src="// IMAGE URL //" alt="// IMAGE ALT //" />
         <div id="member-card-description-container">
             <div id="member-card-description-name"> // NAME // </div>
-            <div id="member-card-description-role"> // ROLE //</div>
+            <div id="member-card-description-title"> // TITLE //</div>
             <div id="member-card-description-intro"> // SHORT INTRO //</div>
         </div>
-        <a href="#" id="member-card-button">${buttonText.toUpperCase()}</a>
+        <a href="details.html" id="member-card-button">${buttonText.toUpperCase()}</a>
     </div>
 `;
 
@@ -27,9 +27,9 @@ class TeamMemberCard extends HTMLElement {
         shadow.appendChild(cardTemplate.content.cloneNode(true));
 
         shadow.querySelector('img').src = this.getAttribute('imgURL');
-        shadow.querySelector('img').alt = (this.getAttribute('name') + " " + this.getAttribute('role'));
+        shadow.querySelector('img').alt = (this.getAttribute('name') + " " + this.getAttribute('title'));
         shadow.getElementById('member-card-description-name').innerText = this.getAttribute('name');
-        shadow.getElementById('member-card-description-role').innerText = this.getAttribute('role');
+        shadow.getElementById('member-card-description-title').innerText = this.getAttribute('title');
         shadow.getElementById('member-card-description-intro').innerText = this.getAttribute('intro');
         
     }
