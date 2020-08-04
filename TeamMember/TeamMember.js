@@ -56,7 +56,7 @@ function insertAfter (referenceNode, nodes) {
     nodes.forEach(node => referenceNode.parentNode.insertBefore(node, referenceNode.nextSibling));
 }
 
-const customColor = sessionStorage.getItem('customColor')
+const customColor = sessionStorage.getItem('customColor') || "#05C46B"
 
 const template = document.createElement('template');
 template.innerHTML = `
