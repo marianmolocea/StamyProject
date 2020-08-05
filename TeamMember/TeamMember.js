@@ -45,7 +45,7 @@ const data = {
 
 const getConsultantDto = async (consultantId="") => {
     // Add endpoint URL here
-    const endpoint = "https://randomuser.me/api/";
+    const endpoint = "https://widgets-api-staging.stamybooking.com/basedata/consultants";
 
     try {
         let response = await fetch(`${endpoint}${consultantId}`);

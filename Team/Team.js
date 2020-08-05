@@ -1,30 +1,13 @@
-let datas = [
-    {
-        imageUrl: "https://i2.wp.com/intoku-zurich.com/wp-content/uploads/2020/01/intoku-312-1-e1584517377833.jpg?w=426&ssl=1",
-        name: "Bea B",
-        title: "Coach",
-        traits: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cursus tristique pharetra eu ipsum. Porttitor adipiscing viverra mauris nunc eu semper nisl."],
-    },
-    {
-        imageUrl: "https://i2.wp.com/intoku-zurich.com/wp-content/uploads/2020/01/intoku-312-1-e1584517377833.jpg?w=426&ssl=1",
-        name: "Bea",
-        title: "Coach",
-        //traits: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cursus tristique pharetra eu ipsum. Porttitor adipiscing viverra mauris nunc eu semper nisl."],    
-    },
-    {
-        imageUrl: "https://i2.wp.com/intoku-zurich.com/wp-content/uploads/2020/01/intoku-312-1-e1584517377833.jpg?w=426&ssl=1",
-        name: "Bea",
-        title: "Coach",
-        traits: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cursus tristique pharetra eu ipsum. Porttitor adipiscing viverra mauris nunc eu semper nisl."],    }
-]
-
 const generateTemplate = ({imageUrl, name, title, traits}) => {
+
+    let replacingAvatarUrl = "https://icon-library.com/images/default-user-icon/default-user-icon-8.jpg"
+
     let element = `
         <div id="member-card-container">
-            <img src=${imageUrl} alt=${name} />
+            <img src=${imageUrl || replacingAvatarUrl} alt=${name} />
             <div id="member-card-description-container">
                 <div id="member-card-description-name">${name}</div>
-                <div id="member-card-description-title">${title}</div>
+                ${title && `<div id="member-card-description-title">${title}</div>`}
                 ${traits && traits.length > 0 ? 
                     `<div id="member-card-description-intro">
                         ${traits[0].split('').slice(0, 120).join('') + "..."}
@@ -101,10 +84,10 @@ template.innerHTML = `
       
     #member-card-container img {
         position: relative;
+        object-fit: cover;
         margin-top: 20px;
-        height: auto;
-        max-width: 180px;
-        min-width: 160px;
+        width: 160px;
+        height: 160px;
         padding: 3px;
         border: 10px solid ${customColor || defaultColor};
         border-radius: 200px;
@@ -304,16 +287,13 @@ class Team extends HTMLElement {
     connectedCallback() {
         let team;
         (async () => {
-
             // Get all team members from the API
             team = await this.getAllTeam()
             console.log(team)            
+
             //Inject the member cards
-            team.forEach(member => this.shadowRoot.getElementById('team-container').insertAdjacentHTML('afterbegin', generateTemplate(member)) )
-            
+            team.forEach(member => this.shadowRoot.getElementById('team-container').insertAdjacentHTML('afterbegin', generateTemplate(member)) )          
         })()
-
-
     }
 }
 
