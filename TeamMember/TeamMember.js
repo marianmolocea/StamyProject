@@ -361,14 +361,14 @@ class Team extends HTMLElement {
             this.shadowRoot.querySelector('img').alt = consultantData.title ? (consultantData.name + "-" + consultantData.title) : consultantData.name;
             
             //Add custom class for grid display 
-            this.shadowRoot.getElementById('team-member-avatar-container').classList.add(data.traits.length === 0 ? "column-span-6" : "column-span-2");
+            this.shadowRoot.getElementById('team-member-avatar-container').classList.add(consultantData.traits.length === 0 ? "column-span-6" : "column-span-2");
             
             //Insert data of the consultant in the avatar card
             this.shadowRoot.getElementById('team-member-avatar-name').innerText = consultantData.name || "No name";
             this.shadowRoot.getElementById('team-member-avatar-title').innerText = consultantData.title || "Team Member";
             
             //Inject the traits cards
-            insertAfter(this.shadowRoot.getElementById('team-member-avatar-container'), displayTraits(data))
+            insertAfter(this.shadowRoot.getElementById('team-member-avatar-container'), displayTraits(consultantData))
             
             //Inject the resume section if exists
             this.shadowRoot.getElementById('team-member-container').insertAdjacentHTML('beforeend', 
