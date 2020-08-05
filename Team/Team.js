@@ -290,7 +290,7 @@ class Team extends HTMLElement {
 
     getAllTeam = async () => {
         // Add endpoint URL here
-        const endpoint = "https://randomuser.me/api/";
+        const endpoint = "https://widgets-api-staging.stamybooking.com/basedata/consultants";
     
         try {
             let response = await fetch(endpoint);
@@ -306,8 +306,8 @@ class Team extends HTMLElement {
         (async () => {
 
             // Get all team members from the API
-            team = datas //await getAllTeam()
-                        
+            team = await this.getAllTeam()
+            console.log(team)            
             //Inject the member cards
             team.forEach(member => this.shadowRoot.getElementById('team-container').insertAdjacentHTML('afterbegin', generateTemplate(member)) )
             
