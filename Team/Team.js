@@ -1,10 +1,10 @@
 const generateTemplate = ({imageUrl, name, title, traits}) => {
 
-    let replacingAvatarUrl = "https://icon-library.com/images/default-user-icon/default-user-icon-8.jpg"
+    let replacementAvatarUrl = "https://icon-library.com/images/default-user-icon/default-user-icon-8.jpg"
 
     let element = `
         <div id="member-card-container">
-            <img src=${imageUrl || replacingAvatarUrl} alt=${name} />
+            <img src=${imageUrl || replacementAvatarUrl} alt=${name} />
             <div id="member-card-description-container">
                 <div id="member-card-description-name">${name}</div>
                 ${title && `<div id="member-card-description-title">${title}</div>`}

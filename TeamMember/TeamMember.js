@@ -346,6 +346,8 @@ class Team extends HTMLElement {
         this.attachShadow({mode: 'open'});
     }
     
+    replacementAvatarUrl = "https://icon-library.com/images/default-user-icon/default-user-icon-8.jpg"
+    
     connectedCallback() {
         let consultantData;
         (async () => {
@@ -357,7 +359,7 @@ class Team extends HTMLElement {
             this.shadowRoot.appendChild(template.content.cloneNode(true));
             
             //Add image info to the template
-            this.shadowRoot.querySelector('img').src = consultantData.imageUrl ? consultantData.imageUrl : "https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg";
+            this.shadowRoot.querySelector('img').src = consultantData.imageUrl ? consultantData.imageUrl : this.replacementAvatarUrl;
             this.shadowRoot.querySelector('img').alt = consultantData.title ? (consultantData.name + "-" + consultantData.title) : consultantData.name;
             
             //Add custom class for grid display 
@@ -365,7 +367,7 @@ class Team extends HTMLElement {
             
             //Insert data of the consultant in the avatar card
             this.shadowRoot.getElementById('team-member-avatar-name').innerText = consultantData.name || "No name";
-            this.shadowRoot.getElementById('team-member-avatar-title').innerText = consultantData.title || "Team Member";
+            this.shadowRoot.getElementById('team-member-avatar-title').innerText = consultantData.title || "";
             
             //Inject the traits cards
             insertAfter(this.shadowRoot.getElementById('team-member-avatar-container'), displayTraits(consultantData))
