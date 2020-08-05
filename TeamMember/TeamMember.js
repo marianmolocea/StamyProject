@@ -243,8 +243,8 @@ template.innerHTML = `
         }
 
         .entry .entry-details {
-            padding: 2px 0 0 20px
-            margin-bottom: 30px;
+            padding-left: 10px;
+            margin-bottom: 0;
         }
 
         .entry .entry-details h4,
