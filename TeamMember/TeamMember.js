@@ -365,7 +365,7 @@ class Team extends HTMLElement {
 
             // Get consultant data from the API
             let consultantId = this.getAttribute('consultant-id')
-            consultantData = await getConsultantDto()
+            consultantData = await getConsultantDto(consultantId)
 
             this.shadowRoot.appendChild(template.content.cloneNode(true));
             
