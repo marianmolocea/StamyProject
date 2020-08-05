@@ -272,33 +272,31 @@ template.innerHTML = `
             padding: 20px 0;
         }
 
+        
         .timeline::before {
-            width: 1px;
-            left: 35%;
+            display: none;
         }
 
         .entry {
-            grid-template-columns: 35% 65%;
+            grid-template-columns: 1fr;
         }
 
         .entry .title {
-            padding: 10px 10px 0 0;
+            padding: 10px 10px 0 20px;
+            text-align: left;
         }
 
         .entry .title::before {
-            width: 8px;
-            height: 8px;
-            border: 3px solid ${customColor};
-            right: -8px;
+            display: none;
         }
 
         .entry .title .entry-title {
-            font-size: 1em;
+            font-size: 1.1em;
         }
 
         .entry .title .entry-date,
         .entry .title .entry-company {
-            font-size: 0.7em
+            font-size: 0.8em
         }
 
         .entry .entry-details {
@@ -307,7 +305,7 @@ template.innerHTML = `
 
         .entry .entry-details h4,
         .entry .entry-details .entry-description {
-            font-size: 0.9em
+            font-size: 1em
         }
     }
     </style>
