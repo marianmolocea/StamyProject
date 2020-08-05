@@ -344,7 +344,6 @@ const formatDate = (startDate, endDate) => {
     let end = new Date(endDate);
 
     let diffDays = parseInt((end - start) / (1000 * 60 * 60 * 24), 10);
-    console.log(start, diffDays)
 
     if(diffDays <= 31) {
         return `${start.getDate()}/${start.getFullYear()}`

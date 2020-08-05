@@ -288,8 +288,7 @@ class Team extends HTMLElement {
         let team;
         (async () => {
             // Get all team members from the API
-            team = await this.getAllTeam()
-            console.log(team)            
+            team = await this.getAllTeam()     
 
             //Inject the member cards
             team.forEach(member => this.shadowRoot.getElementById('team-container').insertAdjacentHTML('afterbegin', generateTemplate(member)) )          
