@@ -88,7 +88,7 @@ const generateResumeEntries = (data) => {
     </div>
     <div class="entry-details">
         <h4>Details and duties:</h4>
-        ${entry.description}
+        <span class="entry-description">${entry.description}
     </div>
     </div>
 
@@ -175,10 +175,11 @@ template.innerHTML = `
     
     .team-member-item-card {
         box-shadow: 0px 2px 20px 2px rgba(51, 51, 51, 0.1);
-        padding: 20px;
+        padding: 0 20px;
         display: flex;
         flex-direction: column;
         justify-content: center;
+        overflow: hidden;
     }
     
     .border-decoration {
@@ -189,7 +190,7 @@ template.innerHTML = `
         width: 100%;
         max-width: 1200px;
         background: #fff;
-        padding: 40px 20px;
+        padding: 60px 0;
         position: relative;
       }
 
@@ -197,7 +198,7 @@ template.innerHTML = `
         content: '';
         position: absolute;
         top: 0px;
-        left: calc(30% + 5px);
+        left: 30%;
         bottom: 0px;
         width: 3px;
         background: ${customColor};
@@ -223,7 +224,7 @@ template.innerHTML = `
         background-color: #fff;
         border-radius: 100%;
         top: 30px;
-        right: -11px;
+        right: -14px;
         z-index: 2;
       }
       .entry .title .entry-title {
@@ -249,17 +250,12 @@ template.innerHTML = `
         color: ${customColor};
       }
       
-      .entry .entry-details ul {
-        color: #333333;
-        padding-left: 0;
-        list-style-type: none;
-        line-height: 1.5em;
-      }
     
     @media only screen and (max-width: 767px) {
         #team-member-container {
             grid-template-columns: 1fr;
             gap: 15px;
+            font-size: 14px;
         }
     
         .column-span-2 {
@@ -282,6 +278,48 @@ template.innerHTML = `
     
         .team-member-item-card {
             border-bottom: 5px solid ${customColor};
+        }
+
+        .timeline {
+            padding: 20px 0;
+        }
+
+        .timeline::before {
+            width: 1px;
+            left: 35%;
+        }
+
+        .entry {
+            grid-template-columns: 35% 65%;
+        }
+
+        .entry .title {
+            padding: 10px 10px 0 0;
+        }
+
+        .entry .title::before {
+            width: 8px;
+            height: 8px;
+            border: 3px solid ${customColor};
+            right: -8px;
+        }
+
+        .entry .title .entry-title {
+            font-size: 1em;
+        }
+
+        .entry .title .entry-date,
+        .entry .title .entry-company {
+            font-size: 0.7em
+        }
+
+        .entry .entry-details {
+            padding: 2px 0 0 20px
+        }
+
+        .entry .entry-details h4,
+        .entry .entry-details .entry-description {
+            font-size: 0.9em
         }
     }
     </style>
