@@ -326,7 +326,7 @@ class Team extends HTMLElement {
             <div class="entry">
             <div class="title">
                 <div class="entry-title">${entry.title}</div>
-                <div class="entry-date">${formatDate(entry.startDate, entry.endDate)}</div>
+                <div class="entry-date">${this.formatDate(entry.startDate, entry.endDate)}</div>
                 <div class="entry-company">${entry.company}</div>
             </div>
             <div class="entry-details">
