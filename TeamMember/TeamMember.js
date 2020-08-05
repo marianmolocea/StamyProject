@@ -1,3 +1,4 @@
+{
 const data = {
     resume: [
         {
@@ -243,6 +244,7 @@ template.innerHTML = `
         }
 
         .entry .entry-details {
+            padding-top: 5px;
             padding-left: 10px;
             margin-bottom: 0;
         }
@@ -383,3 +385,4 @@ class Team extends HTMLElement {
 }
 
 window.customElements.define('stamy-team-member', Team);
+}
