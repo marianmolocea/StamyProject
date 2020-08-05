@@ -7,7 +7,7 @@ const generateTemplate = ({imageUrl, name, title, traits}) => {
             <img src=${imageUrl || replacementAvatarUrl} alt=${name} />
             <div id="member-card-description-container">
                 <div id="member-card-description-name">${name}</div>
-                ${title && `<div id="member-card-description-title">${title}</div>`}
+                ${title ? `<div id="member-card-description-title">${title}</div>` : ""}
                 ${traits && traits.length > 0 ? 
                     `<div id="member-card-description-intro">
                         ${traits[0].split('').slice(0, 120).join('') + "..."}
