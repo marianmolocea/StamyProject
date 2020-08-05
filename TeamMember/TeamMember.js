@@ -244,7 +244,7 @@ template.innerHTML = `
 
         .entry .entry-details {
             padding: 2px 0 0 20px
-            marin-button: 30px;
+            margin-bottom: 30px;
         }
 
         .entry .entry-details h4,
