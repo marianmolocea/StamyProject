@@ -11,11 +11,37 @@ const data = {
         `<div class="wpb_wrapper"><div class="wpb_text_column wpb_content_element vc_custom_1586172759934"><div class="wpb_wrapper"><p><strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">Focus therapy</span></span></strong></p><p><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">I am happy to help change the perspective on some things,give impulses and give impetus to think new ways and to go. </span><span style="vertical-align: inherit;">I am most pleased when people manage to accept thesesuggestions, to implement them for themselves on a permanentbasis and to gain new strength and vitality.</span></span></p></div></div></div>`
     
     ],
-    resume: ` <strong>Work Experience</strong>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quam asperiores totam vitae tempore magni distinctio eaque obcaecati enim, eos optio quos quisquam quia facere ipsum perspiciatis nulla repudiandae atque.</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quam asperiores totam vitae tempore magni distinctio eaque obcaecati enim, eos optio quos quisquam quia facere ipsum perspiciatis nulla repudiandae atque.</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quam asperiores totam vitae tempore magni distinctio eaque obcaecati enim, eos optio quos quisquam quia facere ipsum perspiciatis nulla repudiandae atque.</p>`
+    resume: [
+        {
+            startDate: "Sat Dec 08 2019 00:00:00 GMT+0000",
+            endDate: "05/07/2020",
+            title: "Coach",
+            company: "Company X",
+            description: `<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quam asperiores totam vitae tempore magni distinctio eaque obcaecati enim, eos optio quos quisquam quia facere ipsum perspiciatis nulla repudiandae atque.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quam asperiores totam vitae tempore magni distinctio eaque obcaecati enim, eos optio quos quisquam quia facere ipsum perspiciatis nulla repudiandae atque.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quam asperiores totam vitae tempore magni distinctio eaque obcaecati enim, eos optio quos quisquam quia facere ipsum perspiciatis nulla repudiandae atque.</p>`    
+        },
+        {
+            startDate: "Sat Dec 08 2019 00:00:00 GMT+0000",
+            endDate: "05/07/2020",
+            title: "Trainer",
+            company: "Company Y",
+            description: `<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quam asperiores totam vitae tempore magni distinctio eaque obcaecati enim, eos optio quos quisquam quia facere ipsum perspiciatis nulla repudiandae atque.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quam asperiores totam vitae tempore magni distinctio eaque obcaecati enim, eos optio quos quisquam quia facere ipsum perspiciatis nulla repudiandae atque.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quam asperiores totam vitae tempore magni distinctio eaque obcaecati enim, eos optio quos quisquam quia facere ipsum perspiciatis nulla repudiandae atque.</p>`    
+        },
+        {
+            startDate: "Sat Dec 08 2019 00:00:00 GMT+0000",
+            endDate: "05/07/2020",
+            title: "Manager",
+            company: "Company Z",
+            description: `<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quam asperiores totam vitae tempore magni distinctio eaque obcaecati enim, eos optio quos quisquam quia facere ipsum perspiciatis nulla repudiandae atque.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quam asperiores totam vitae tempore magni distinctio eaque obcaecati enim, eos optio quos quisquam quia facere ipsum perspiciatis nulla repudiandae atque.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quam asperiores totam vitae tempore magni distinctio eaque obcaecati enim, eos optio quos quisquam quia facere ipsum perspiciatis nulla repudiandae atque.</p>`    
+        }
+    ]
 }
+
 
 const getConsultantDto = async (consultantId="") => {
     // Add endpoint URL here
@@ -49,6 +75,24 @@ const displayTraits = ({traits}) => {
         ))
         return nodes.reverse();
     }
+}
+
+const generateResumeEntries = (data) => {
+    return data.map(entry => `
+
+    <div class="entry">
+    <div class="title">
+        <div class="entry-title">${entry.title}</div>
+        <div class="entry-date">${formatDate(entry.startDate, entry.endDate)}</div>
+        <div class="entry-company">${entry.company}</div>
+    </div>
+    <div class="entry-details">
+        <h4>Details and duties:</h4>
+        ${entry.description}
+    </div>
+    </div>
+
+`).join('')
 }
 
 //Insert each node element one after another
@@ -140,6 +184,77 @@ template.innerHTML = `
     .border-decoration {
         border-left: 5px solid ${customColor};
     }
+
+    .timeline {
+        width: 100%;
+        max-width: 1200px;
+        background: #fff;
+        padding: 40px 20px;
+        position: relative;
+      }
+
+      .timeline::before {
+        content: '';
+        position: absolute;
+        top: 0px;
+        left: calc(30% + 5px);
+        bottom: 0px;
+        width: 3px;
+        background: ${customColor};
+      }
+     
+      .entry {
+        display: grid;
+        grid-template-columns: 30% 70%;
+        position: relative;
+      }
+      .entry .title {
+        padding-top: 30px;
+        padding-right: 30px;
+        text-align: right;
+        position: relative;
+      }
+      .entry .title::before {
+        content: '';
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        border: 4px solid ${customColor};
+        background-color: #fff;
+        border-radius: 100%;
+        top: 30px;
+        right: -11px;
+        z-index: 2;
+      }
+      .entry .title .entry-title {
+        margin-bottom: 5px;
+        font-size: 1.1em;
+        font-weight: bold;
+      }
+      .entry .title .entry-date {
+        margin-bottom: 5px;
+        font-size: .9em;
+        color: ${customColor};
+        font-weight: 700;
+      }
+      .entry .entry-details {
+        margin: 0 0 3em;
+        padding-left: 30px;
+        padding-top: 20px;
+      }
+      
+      .entry .entry-details h4 {
+        margin: 10px 0;
+        font-size: 1em;
+        color: ${customColor};
+      }
+      
+      .entry .entry-details ul {
+        color: #333333;
+        padding-left: 0;
+        list-style-type: none;
+        line-height: 1.5em;
+      }
     
     @media only screen and (max-width: 767px) {
         #team-member-container {
@@ -183,6 +298,23 @@ template.innerHTML = `
 
     </div>`;
 
+
+//Format the date to be displayed in the timeline
+const formatDate = (startDate, endDate) => {
+
+    let start = new Date(startDate);
+    let end = new Date(endDate);
+
+    let diffDays = parseInt((end - start) / (1000 * 60 * 60 * 24), 10);
+    console.log(start, diffDays)
+
+    if(diffDays <= 31) {
+        return `${start.getDate()}/${start.getFullYear()}`
+    }else {
+        return `${start.getDate()}/${start.getFullYear()} - ${end.getDate()}/${end.getFullYear()}`
+    }
+} 
+
 class Team extends HTMLElement {
     constructor () {
         super();
@@ -214,12 +346,15 @@ class Team extends HTMLElement {
             insertAfter(this.shadowRoot.getElementById('team-member-avatar-container'), displayTraits(data))
             
             //Inject the resume section if exists
-            this.shadowRoot.getElementById('team-member-container').insertAdjacentHTML('beforeend', `${
-                data.resume ? 
+            this.shadowRoot.getElementById('team-member-container').insertAdjacentHTML('beforeend', 
+                data.resume && data.resume.length > 0 ? 
                 `<div class="team-member-item-card column-span-6">
-                    ${data.resume}
-                </div>` : ""
-            }`)
+                    <div class="timeline">
+                        ${generateResumeEntries(data.resume)}
+                    </div>
+                </div>` 
+                : "" 
+            ) 
         })()
     }
 }

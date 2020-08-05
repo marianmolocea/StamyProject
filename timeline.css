@@ -77,13 +77,3 @@
   list-style-type: none;
   line-height: 1.5em;
 }
-
-@media (max-width: 767px) {
-  .timeline {
-    background-color: aqua;
-  }
-
-  .entry .title .entry-title {
-
-  }
-}
