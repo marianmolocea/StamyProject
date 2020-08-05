@@ -30,67 +30,11 @@ const data = {
     ]
 }
 
-
-const getConsultantDto = async (consultantId="") => {
-    // Add endpoint URL here
-    const endpoint = "https://widgets-api-staging.stamybooking.com/basedata/consultants";
-
-    try {
-        let response = await fetch(`${endpoint}/${consultantId}`);
-        let data = await response.json();
-        return data
-    } catch (err) {
-        console.log(err);
-    }
-}
-
-//Make a node elements array with each trait available
-const displayTraits = ({traits}) => {
-    if(traits) {
-        let nodes = traits.map((trait, index, arr) => (
-            new DOMParser().parseFromString(
-                `<div class="team-member-item-card 
-                ${
-                    !index ? 
-                        `column-span-4` : 
-                        (index === arr.length - 1 && arr.length % 2 === 0) ? 
-                            `column-span-6 border-decoration` :
-                            `column-span-3 border-decoration`
-                }">
-                    ${trait}
-                </div>`
-            , "text/html").body.firstChild
-        ))
-        return nodes.reverse();
-    }
-}
-
-const generateResumeEntries = (data) => {
-    return data.map(entry => `
-
-    <div class="entry">
-    <div class="title">
-        <div class="entry-title">${entry.title}</div>
-        <div class="entry-date">${formatDate(entry.startDate, entry.endDate)}</div>
-        <div class="entry-company">${entry.company}</div>
-    </div>
-    <div class="entry-details">
-        <h4>Details and duties:</h4>
-        <span class="entry-description">${entry.description}
-    </div>
-    </div>
-
-`).join('')
-}
-
-//Insert each node element one after another
-function insertAfter (referenceNode, nodes) {
-    nodes.forEach(node => referenceNode.parentNode.insertBefore(node, referenceNode.nextSibling));
-}
-
+//Create a variable to store the custom color. 
 const customColor = sessionStorage.getItem('customColor') || "#05C46B"
 
 const template = document.createElement('template');
+
 template.innerHTML = `
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
@@ -272,7 +216,6 @@ template.innerHTML = `
             padding: 20px 0;
         }
 
-        
         .timeline::before {
             display: none;
         }
@@ -301,6 +244,7 @@ template.innerHTML = `
 
         .entry .entry-details {
             padding: 2px 0 0 20px
+            marin-button: 30px;
         }
 
         .entry .entry-details h4,
@@ -322,26 +266,80 @@ template.innerHTML = `
 
     </div>`;
 
-
-//Format the date to be displayed in the timeline
-const formatDate = (startDate, endDate) => {
-
-    let start = new Date(startDate);
-    let end = new Date(endDate);
-
-    let diffDays = parseInt((end - start) / (1000 * 60 * 60 * 24), 10);
-
-    if(diffDays <= 31) {
-        return `${start.getDate()}/${start.getFullYear()}`
-    }else {
-        return `${start.getDate()}/${start.getFullYear()} - ${end.getDate()}/${end.getFullYear()}`
-    }
-} 
-
+    
 class Team extends HTMLElement {
     constructor () {
         super();
         this.attachShadow({mode: 'open'});
+    }
+    
+    getConsultantDto = async (consultantId="") => {
+        // Add endpoint URL here
+        const endpoint = "https://widgets-api-staging.stamybooking.com/basedata/consultants";
+        try {
+            let response = await fetch(`${endpoint}/${consultantId}`);
+            let data = await response.json();
+            return data
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    //Make a node elements array with each trait available
+    displayTraits = ({traits}) => {
+        if(traits) {
+            let nodes = traits.map((trait, index, arr) => (
+                new DOMParser().parseFromString(
+                    `<div class="team-member-item-card 
+                    ${
+                        !index ? 
+                            `column-span-4` : 
+                            (index === arr.length - 1 && arr.length % 2 === 0) ? 
+                                `column-span-6 border-decoration` :
+                                `column-span-3 border-decoration`
+                    }">
+                        ${trait}
+                    </div>`
+                , "text/html").body.firstChild
+            ))
+            return nodes.reverse();
+        }
+    }
+
+    //Format the date to be displayed in the timeline
+    formatDate = (startDate, endDate) => {
+
+        let start = new Date(startDate);
+        let end = new Date(endDate);
+    
+        let diffDays = parseInt((end - start) / (1000 * 60 * 60 * 24), 10);
+    
+        if(diffDays <= 31) {
+            return `${start.getDate()}/${start.getFullYear()}`
+        }else {
+            return `${start.getDate()}/${start.getFullYear()} - ${end.getDate()}/${end.getFullYear()}`
+        }
+    }
+
+    generateResumeEntries = (data) => {
+        return data.map(entry => `
+            <div class="entry">
+            <div class="title">
+                <div class="entry-title">${entry.title}</div>
+                <div class="entry-date">${formatDate(entry.startDate, entry.endDate)}</div>
+                <div class="entry-company">${entry.company}</div>
+            </div>
+            <div class="entry-details">
+                <h4>Details and duties:</h4>
+                <span class="entry-description">${entry.description}
+            </div>
+            </div>`
+        ).join('')
+    }
+
+    //Insert each node element one after another
+    insertAfter (referenceNode, nodes) {
+        nodes.forEach(node => referenceNode.parentNode.insertBefore(node, referenceNode.nextSibling));
     }
     
     replacementAvatarUrl = "https://icon-library.com/images/default-user-icon/default-user-icon-8.jpg"
@@ -352,7 +350,7 @@ class Team extends HTMLElement {
 
             // Get consultant data from the API
             let consultantId = this.getAttribute('consultant-id')
-            consultantData = await getConsultantDto(consultantId)
+            consultantData = await this.getConsultantDto(consultantId)
 
             this.shadowRoot.appendChild(template.content.cloneNode(true));
             
@@ -368,14 +366,14 @@ class Team extends HTMLElement {
             this.shadowRoot.getElementById('team-member-avatar-title').innerText = consultantData.title || "";
             
             //Inject the traits cards
-            insertAfter(this.shadowRoot.getElementById('team-member-avatar-container'), displayTraits(consultantData))
+            this.insertAfter(this.shadowRoot.getElementById('team-member-avatar-container'), this.displayTraits(consultantData))
             
             //Inject the resume section if exists
             this.shadowRoot.getElementById('team-member-container').insertAdjacentHTML('beforeend', 
                 data.resume && data.resume.length > 0 ? 
                 `<div class="team-member-item-card column-span-6">
                     <div class="timeline">
-                        ${generateResumeEntries(data.resume)}
+                        ${this.generateResumeEntries(data.resume)}
                     </div>
                 </div>` 
                 : "" 

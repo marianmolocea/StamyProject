@@ -1,23 +1,3 @@
-const generateTemplate = ({imageUrl, name, title, traits}) => {
-
-    let replacementAvatarUrl = "https://icon-library.com/images/default-user-icon/default-user-icon-8.jpg"
-
-    let element = `
-        <div id="member-card-container">
-            <img src=${imageUrl || replacementAvatarUrl} alt=${name} />
-            <div id="member-card-description-container">
-                <div id="member-card-description-name">${name}</div>
-                ${title ? `<div id="member-card-description-title">${title}</div>` : ""}
-                ${traits && traits.length > 0 ? 
-                    `<div id="member-card-description-intro">
-                        ${traits[0].split('').slice(0, 120).join('') + "..."}
-                    </div>` : ""}
-            </div>
-            <a href="details.html" id="member-card-button">SEE MORE</a>
-        </div>`
-    return element;
-}
-
 let defaultColor = "#05C46B"
 let customColor = sessionStorage.getItem('customColor')
 
@@ -284,6 +264,26 @@ class Team extends HTMLElement {
         }
     }
 
+    generateTemplate = ({imageUrl, name, title, traits}) => {
+
+        let replacementAvatarUrl = "https://icon-library.com/images/default-user-icon/default-user-icon-8.jpg"
+    
+        let element = `
+            <div id="member-card-container">
+                <img src=${imageUrl || replacementAvatarUrl} alt=${name} />
+                <div id="member-card-description-container">
+                    <div id="member-card-description-name">${name}</div>
+                    ${title ? `<div id="member-card-description-title">${title}</div>` : ""}
+                    ${traits && traits.length > 0 ? 
+                        `<div id="member-card-description-intro">
+                            ${traits[0].split('').slice(0, 120).join('') + "..."}
+                        </div>` : ""}
+                </div>
+                <a href="details.html" id="member-card-button">SEE MORE</a>
+            </div>`
+        return element;
+    }
+
     connectedCallback() {
         let team;
         (async () => {
@@ -291,7 +291,7 @@ class Team extends HTMLElement {
             team = await this.getAllTeam()     
 
             //Inject the member cards
-            team.forEach(member => this.shadowRoot.getElementById('team-container').insertAdjacentHTML('afterbegin', generateTemplate(member)) )          
+            team.forEach(member => this.shadowRoot.getElementById('team-container').insertAdjacentHTML('afterbegin', this.generateTemplate(member)) )          
         })()
     }
 }
