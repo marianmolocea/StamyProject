@@ -225,7 +225,7 @@ template.innerHTML = `
         }
 
         .entry .title {
-            padding: 10px 10px 0 20px;
+            padding-left: 10px;
             text-align: left;
         }
 
