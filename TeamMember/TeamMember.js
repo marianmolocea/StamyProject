@@ -48,7 +48,7 @@ const getConsultantDto = async (consultantId="") => {
     const endpoint = "https://widgets-api-staging.stamybooking.com/basedata/consultants";
 
     try {
-        let response = await fetch(`${endpoint}${consultantId}`);
+        let response = await fetch(`${endpoint}/${consultantId}`);
         let data = await response.json();
         return data
     } catch (err) {
