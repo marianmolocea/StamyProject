@@ -264,7 +264,7 @@ class Team extends HTMLElement {
         }
     }
 
-    generateTemplate = ({imageUrl, name, title, traits}) => {
+    generateTemplate = ({imageUrl, name, title, intro}) => {
 
         let replacementAvatarUrl = "https://icon-library.com/images/default-user-icon/default-user-icon-8.jpg"
     
