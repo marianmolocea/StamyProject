@@ -360,10 +360,11 @@ class Team extends HTMLElement {
         }
     }
 
-    generateTemplate = ({imageUrl, name, title, intro}) => {
+    generateTemplate = ({id,imageUrl, name, title, intro}) => {
 
         let replacementAvatarUrl = "https://icon-library.com/images/default-user-icon/default-user-icon-8.jpg"
     
+        //Change the anchor tag href to the corresponding element.
         let element = `
             <div id="member-card-container">
                 <img src=${imageUrl || replacementAvatarUrl} alt=${name} />
@@ -375,7 +376,7 @@ class Team extends HTMLElement {
                             ${intro.split('').slice(0, 120).join('') + "..."}
                         </div>` : ""}
                 </div>
-                <a href="details.html" id="member-card-button">SEE MORE</a>
+                <a href="${id}" id="member-card-button">SEE MORE</a>
             </div>`
         return element;
     }
