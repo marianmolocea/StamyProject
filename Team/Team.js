@@ -378,15 +378,15 @@ class Team extends HTMLElement {
 
     connectedCallback() {
         (async () => {
-            window.addEventListener('load', () => {
-                this.shadowRoot.appendChild(cardLoader.content.cloneNode(true));
-            })
+            this.shadowRoot.appendChild(cardLoader.content.cloneNode(true));
+
             let team;
             // Get all team members from the API
-                team = await this.getAllTeam()     
-    
-                //Inject the member cards
-                team.forEach(member => this.shadowRoot.getElementById('team-container').insertAdjacentHTML('afterbegin', this.generateTemplate(member)))
+            team = await this.getAllTeam()     
+            
+            //Inject the member cards
+            team.forEach(member => this.shadowRoot.getElementById('team-container').insertAdjacentHTML('afterbegin', this.generateTemplate(member)))
+            this.shadowRoot.removeChild(cardLoader)
         })()
     }
 }
