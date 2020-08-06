@@ -108,7 +108,7 @@ template.innerHTML = `
     
     .team-member-item-card {
         box-shadow: 0px 2px 20px 2px rgba(51, 51, 51, 0.1);
-        padding: 0 20px;
+        padding: 20px;
         display: flex;
         flex-direction: column;
         justify-content: center;
