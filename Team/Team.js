@@ -3,23 +3,6 @@ let defaultColor = "#05C46B"
 //Change the sessionStorage with a color from the backend
 let customColor = sessionStorage.getItem('customColor')
 
-const pickColor = (color) => {
-    if(color === 1) {
-        sessionStorage.setItem('customColor', '#8854d0');
-        location.reload();
-    } else if (color === 2) {
-        sessionStorage.setItem('customColor', "#fa8231");
-        location.reload();
-    } else if (color === 3) {
-        sessionStorage.setItem('customColor', "#eb3b5a");
-        location.reload();
-    }else if (color === 4) {
-        sessionStorage.setItem('customColor', "#05C46B");
-        location.reload();
-    }
-}
-
-
 const template = document.createElement('template');
 
 //TEMPLATE BEGINNING
