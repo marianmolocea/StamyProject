@@ -427,20 +427,20 @@ class Team extends HTMLElement {
         let consultantData;
         (async () => {
 
-            this.shadowRoot.getElementById('team-member-container').insertAdjacentHTML('afterbegin', cardLoader);
+            this.shadowRoot.getElementById('team-member-container').insertAdjacentHTML('beforebegin', cardLoader);
 
             // Get consultant data from the API
             let consultantId = this.getAttribute('consultant-id')
             consultantData = await this.getConsultantDto(consultantId)
-            
-            let node = new DOMParser().parseFromString(`
+
+            this.shadowRoot.getElementById('team-member-container').parentNode.replaceChild(document.createTextNode(""), this.shadowRoot.getElementById('loader-member-container'))
+            this.shadowRoot.getElementById('team-member-container').insertAdjacentHTML('afterbegin', `
             <div id="team-member-avatar-container">
                 <img src="// IMG URL //" alt="// ALT //" />
                 <div id="team-member-avatar-name">// NAME //</div>
                 <div id="team-member-avatar-title">// TITLE //</div>
-            </div>`, "text/html")
+            </div>`)
 
-            this.shadowRoot.getElementById('team-member-container').replaceChild(node, this.shadowRoot.getElementById('loader-member-container'))
 
             //Add image info to the template
             this.shadowRoot.querySelector('img').src = consultantData.imageUrl ? consultantData.imageUrl : this.replacementAvatarUrl;
