@@ -4,6 +4,7 @@ let defaultColor = "#05C46B"
 let customColor = sessionStorage.getItem('customColor')
 
 const template = document.createElement('template');
+const cardLoader = document.createElement('template');
 
 //TEMPLATE BEGINNING
 
@@ -222,6 +223,114 @@ template.innerHTML = `
 
 //TEMPLATE END
 
+cardLoader.innerHTML = `
+    <style>
+
+    .team-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        max-width: 1180px;
+        width: 100%;
+    }
+
+    .loader-card-container {
+        width: 350px;
+        min-height: 400px;
+        background-color: #eee;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+    
+    .loader-card-container .loader-image-placeholder {
+        width: 150px;
+        height: 150px;
+        background-color: #ddd;
+        border-radius: 200px;
+        overflow: hidden;
+    }
+    
+    .loader-card-container .loader-description-container {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .loader-description-container .loader-name {
+        height: 18px;
+        width: 130px;
+        background-color: #ddd;
+        margin-top: 40px;
+        overflow: hidden;
+    }
+    
+    .loader-description-container .loader-description {
+        height: 18px;
+        width: 230px;
+        background-color: #ddd;
+        margin-top: 15px;
+        overflow: hidden;
+    }
+    
+    /* The loading Class */ 
+    .loading { 
+        position: relative; 
+    } 
+    
+    /* The moving element */ 
+    .loading::after { 
+        display: block; 
+        content: ""; 
+        position: absolute; 
+        width: 100%;
+        height: 100%; 
+        transform: translateX(-100%);                   
+        background: linear-gradient(90deg, transparent, 
+                rgba(255, 255, 255, 0.3), transparent); 
+    
+        /* Adding animation */ 
+        animation: loading 1s infinite; 
+    } 
+    
+    /* Loading Animation */ 
+    @keyframes loading { 
+        100% { 
+            transform: translateX(100%); 
+        } 
+    }
+    </style>
+    <div class="team-container">
+        <div class="loader-card-container">
+            <div class="loader-image-placeholder loading"></div>
+            <div class="loader-description-container">
+                <div class="loader-name loading"></div>
+                <div class="loader-description loading"></div>
+                <div class="loader-description loading"></div>
+            </div>
+        </div>
+        <div class="loader-card-container">
+            <div class="loader-image-placeholder loading"></div>
+            <div class="loader-description-container">
+                <div class="loader-name loading"></div>
+                <div class="loader-description loading"></div>
+                <div class="loader-description loading"></div>
+            </div>
+        </div>
+        <div class="loader-card-container">
+            <div class="loader-image-placeholder loading"></div>
+            <div class="loader-description-container">
+                <div class="loader-name loading"></div>
+                <div class="loader-description loading"></div>
+                <div class="loader-description loading"></div>
+            </div>
+        </div>
+    </div>
+`
+
+let isLoaded = false;
+
 class Team extends HTMLElement {
     constructor() {
         super();
@@ -229,6 +338,8 @@ class Team extends HTMLElement {
         this.attachShadow({mode: 'open'});
 
         this.shadowRoot.appendChild(template.content.cloneNode(true));
+
+
     }
 
     getAllTeam = async () => {
@@ -238,6 +349,7 @@ class Team extends HTMLElement {
         try {
             let response = await fetch(endpoint);
             let data = await response.json();
+            isLoaded = true;
             return data
         } catch (err) {
             console.log(err);
@@ -270,8 +382,12 @@ class Team extends HTMLElement {
             // Get all team members from the API
             team = await this.getAllTeam()     
 
+            isLoaded ?
             //Inject the member cards
-            team.forEach(member => this.shadowRoot.getElementById('team-container').insertAdjacentHTML('afterbegin', this.generateTemplate(member)) )          
+            team.forEach(member => this.shadowRoot.getElementById('team-container').insertAdjacentHTML('afterbegin', this.generateTemplate(member)))
+            :
+            // inject loader
+            this.shadowRoot.appendChild(cardLoader.content.cloneNode(true));
         })()
     }
 }
