@@ -1,4 +1,6 @@
 let defaultColor = "#05C46B"
+
+//Change the sessionStorage with a color from the backend
 let customColor = sessionStorage.getItem('customColor')
 
 const pickColor = (color) => {
@@ -19,6 +21,9 @@ const pickColor = (color) => {
 
 
 const template = document.createElement('template');
+
+//TEMPLATE BEGINNING
+
 template.innerHTML = `
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
@@ -238,9 +243,7 @@ template.innerHTML = `
     </div>
 `;
 
-function insertAfter (referenceNode, newNode) {
-    referenceNode.parentNode.insertBefore(newNode, referenceNode);
-}
+//TEMPLATE END
 
 class Team extends HTMLElement {
     constructor() {

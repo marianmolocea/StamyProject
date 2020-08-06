@@ -1,40 +1,9 @@
-{
-const data = {
-    resume: [
-        {
-            startDate: "Sat Dec 08 2019 00:00:00 GMT+0000",
-            endDate: "05/07/2020",
-            title: "Coach",
-            company: "Company X",
-            description: `<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quam asperiores totam vitae tempore magni distinctio eaque obcaecati enim, eos optio quos quisquam quia facere ipsum perspiciatis nulla repudiandae atque.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quam asperiores totam vitae tempore magni distinctio eaque obcaecati enim, eos optio quos quisquam quia facere ipsum perspiciatis nulla repudiandae atque.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quam asperiores totam vitae tempore magni distinctio eaque obcaecati enim, eos optio quos quisquam quia facere ipsum perspiciatis nulla repudiandae atque.</p>`    
-        },
-        {
-            startDate: "Sat Dec 08 2019 00:00:00 GMT+0000",
-            endDate: "05/07/2020",
-            title: "Trainer",
-            company: "Company Y",
-            description: `<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quam asperiores totam vitae tempore magni distinctio eaque obcaecati enim, eos optio quos quisquam quia facere ipsum perspiciatis nulla repudiandae atque.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quam asperiores totam vitae tempore magni distinctio eaque obcaecati enim, eos optio quos quisquam quia facere ipsum perspiciatis nulla repudiandae atque.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quam asperiores totam vitae tempore magni distinctio eaque obcaecati enim, eos optio quos quisquam quia facere ipsum perspiciatis nulla repudiandae atque.</p>`    
-        },
-        {
-            startDate: "Sat Dec 08 2019 00:00:00 GMT+0000",
-            endDate: "05/07/2020",
-            title: "Manager",
-            company: "Company Z",
-            description: `<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quam asperiores totam vitae tempore magni distinctio eaque obcaecati enim, eos optio quos quisquam quia facere ipsum perspiciatis nulla repudiandae atque.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quam asperiores totam vitae tempore magni distinctio eaque obcaecati enim, eos optio quos quisquam quia facere ipsum perspiciatis nulla repudiandae atque.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quam asperiores totam vitae tempore magni distinctio eaque obcaecati enim, eos optio quos quisquam quia facere ipsum perspiciatis nulla repudiandae atque.</p>`    
-        }
-    ]
-}
-
 //Create a variable to store the custom color. 
 const customColor = sessionStorage.getItem('customColor') || "#05C46B"
 
 const template = document.createElement('template');
+
+// TEMPLATE BEGINNING
 
 template.innerHTML = `
     <style>
@@ -255,6 +224,7 @@ template.innerHTML = `
         }
     }
     </style>
+
     <div id="team-member-container">
         <div id="team-member-avatar-container">
             <img src="// IMG URL //" alt="// ALT //" />
@@ -268,7 +238,8 @@ template.innerHTML = `
 
     </div>`;
 
-    
+// TEMPLATE END
+
 class Team extends HTMLElement {
     constructor () {
         super();
@@ -385,4 +356,3 @@ class Team extends HTMLElement {
 }
 
 window.customElements.define('stamy-team-member', Team);
-}
