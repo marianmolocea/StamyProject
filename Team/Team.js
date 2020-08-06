@@ -337,7 +337,7 @@ class Team extends HTMLElement {
 
         this.attachShadow({mode: 'open'});
 
-        this.shadowRoot.appendChild(template.content.cloneNode(true));
+        this.shadowRoot.appendChild(template.content.cloneNode(true))
 
 
     }
@@ -377,18 +377,16 @@ class Team extends HTMLElement {
     }
 
     connectedCallback() {
-        let team;
         (async () => {
+            window.addEventListener('load', () => {
+                this.shadowRoot.appendChild(cardLoader.content.cloneNode(true));
+            })
+            let team;
             // Get all team members from the API
-            if(isLoaded) {
                 team = await this.getAllTeam()     
     
                 //Inject the member cards
                 team.forEach(member => this.shadowRoot.getElementById('team-container').insertAdjacentHTML('afterbegin', this.generateTemplate(member)))
-            } else {
-                // inject loader
-                this.shadowRoot.appendChild(cardLoader.content.cloneNode(true));
-            }
         })()
     }
 }
