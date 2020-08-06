@@ -4,7 +4,6 @@ let defaultColor = "#05C46B"
 let customColor = sessionStorage.getItem('customColor')
 
 const template = document.createElement('template');
-//const cardLoader = document.createElement('template');
 
 //TEMPLATE BEGINNING
 
@@ -223,7 +222,7 @@ template.innerHTML = `
 
 //TEMPLATE END
 
-cardLoader = `
+const cardLoader = `
     <style>
 
     #team-container-loader {
@@ -334,12 +333,8 @@ let isLoaded = false;
 class Team extends HTMLElement {
     constructor() {
         super();
-
         this.attachShadow({mode: 'open'});
-
-        this.shadowRoot.appendChild(template.content.cloneNode(true))
-
-
+        this.shadowRoot.appendChild(template.content.cloneNode(true));
     }
 
     getAllTeam = async () => {

@@ -240,10 +240,121 @@ template.innerHTML = `
 
 // TEMPLATE END
 
+const cardLoader = ` 
+    <style>
+        #loader-member-container {
+            max-width: 1300px;
+            width: 100%;
+            min-height: 400px;
+            background-color: #eee;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        #loader-member-container .loader-image-placeholder {
+            width: 150px;
+            height: 150px;
+            background-color: #ddd;
+            border-radius: 200px;
+            overflow: hidden;
+            margin-right: 30px;
+        }
+        
+        #loader-member-container .loader-description-container {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .loader-description-container .loader-name {
+            height: 18px;
+            width: 130px;
+            background-color: #ddd;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+        
+        .loader-description-container .loader-name:nth-child(2) {
+            margin-bottom: 40px;
+            width: 150px;
+        }
+        
+        .loader-description-container .loader-description {
+            height: 18px;
+            width: 230px;
+            background-color: #ddd;
+            margin-top: 15px;
+            overflow: hidden;
+        }
+        
+        .loader-description-container .loader-description:nth-child(3) {
+            width: 250px;
+        }
+        
+        .loader-description-container .loader-description:nth-child(5) {
+            width: 280px;
+        }
+        
+        /* The loading Class */ 
+        .loading { 
+            position: relative; 
+        } 
+        
+        /* The moving element */ 
+        .loading::after { 
+            display: block; 
+            content: ""; 
+            position: absolute; 
+            width: 100%;
+            height: 100%; 
+            transform: translateX(-100%);                   
+            background: linear-gradient(90deg, transparent, 
+                    rgba(255, 255, 255, 0.3), transparent); 
+        
+            /* Adding animation */ 
+            animation: loading 1s infinite; 
+        } 
+        
+        /* Loading Animation */ 
+        @keyframes loading { 
+            100% { 
+                transform: translateX(100%); 
+            } 
+        }
+        
+        @media only screen and (max-width: 767px) {
+            #loader-member-container {
+                flex-direction: column;
+                height: 90vh;
+                justify-content: space-evenly;
+                padding: 20px;
+                box-sizing: border-box;
+                align-items: center;
+            }
+        
+            #loader-member-container .loader-image-placeholder {
+                margin: 0;
+            }
+        }    
+    </style>
+    <div id="loader-member-container">
+        <div class="loader-image-placeholder loading"></div>
+        <div class="loader-description-container">
+            <div class="loader-name loading"></div>
+            <div class="loader-name loading"></div>
+            <div class="loader-description loading"></div>
+            <div class="loader-description loading"></div>
+            <div class="loader-description loading"></div>
+        </div>
+    </div>
+`;
+
 class Team extends HTMLElement {
     constructor () {
         super();
         this.attachShadow({mode: 'open'});
+        this.shadowRoot.appendChild(template.content.cloneNode(true));
     }
     
     getConsultantDto = async (consultantId="") => {
@@ -321,11 +432,11 @@ class Team extends HTMLElement {
         let consultantData;
         (async () => {
 
+            this.shadowRoot.getElementById('team-member-container').insertAdjacentHTML('afterbegin', cardLoader);
+
             // Get consultant data from the API
             let consultantId = this.getAttribute('consultant-id')
             consultantData = await this.getConsultantDto(consultantId)
-
-            this.shadowRoot.appendChild(template.content.cloneNode(true));
             
             //Add image info to the template
             this.shadowRoot.querySelector('img').src = consultantData.imageUrl ? consultantData.imageUrl : this.replacementAvatarUrl;
@@ -350,7 +461,9 @@ class Team extends HTMLElement {
                     </div>
                 </div>` 
                 : "" 
-            ) 
+            )
+
+            this.shadowRoot.getElementById('team-member-container').replaceChild(document.createTextNode(""), this.shadowRoot.getElementById('loader-member-container'))
         })()
     }
 }

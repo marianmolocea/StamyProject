@@ -1,23 +1,24 @@
-.loader-card-container {
-    width: 350px;
+#loader-member-container {
+    max-width: 1300px;
+    width: 100%;
     min-height: 400px;
     background-color: #eee;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     overflow: hidden;
 }
 
-.loader-card-container .loader-image-placeholder {
+#loader-member-container .loader-image-placeholder {
     width: 150px;
     height: 150px;
     background-color: #ddd;
     border-radius: 200px;
     overflow: hidden;
+    margin-right: 30px;
 }
 
-.loader-card-container .loader-description-container {
+#loader-member-container .loader-description-container {
     display: flex;
     flex-direction: column;
 }
@@ -26,8 +27,13 @@
     height: 18px;
     width: 130px;
     background-color: #ddd;
-    margin-top: 40px;
+    margin-bottom: 10px;
     overflow: hidden;
+}
+
+.loader-description-container .loader-name:nth-child(2) {
+    margin-bottom: 40px;
+    width: 150px;
 }
 
 .loader-description-container .loader-description {
@@ -36,6 +42,14 @@
     background-color: #ddd;
     margin-top: 15px;
     overflow: hidden;
+}
+
+.loader-description-container .loader-description:nth-child(3) {
+    width: 250px;
+}
+
+.loader-description-container .loader-description:nth-child(5) {
+    width: 280px;
 }
 
 /* The loading Class */ 
@@ -63,4 +77,19 @@
     100% { 
         transform: translateX(100%); 
     } 
+}
+
+@media only screen and (max-width: 767px) {
+    #loader-member-container {
+        flex-direction: column;
+        height: 90vh;
+        justify-content: space-evenly;
+        padding: 20px;
+        box-sizing: border-box;
+        align-items: center;
+    }
+
+    #loader-member-container .loader-image-placeholder {
+        margin: 0;
+    }
 }
