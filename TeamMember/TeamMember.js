@@ -343,10 +343,10 @@ class Team extends HTMLElement {
             
             //Inject the resume section if exists
             this.shadowRoot.getElementById('team-member-container').insertAdjacentHTML('beforeend', 
-                data.resume && data.resume.length > 0 ? 
+                consultantData.resume && consultantData.resume.length > 0 ? 
                 `<div class="team-member-item-card column-span-6">
                     <div class="timeline">
-                        ${this.generateResumeEntries(data.resume)}
+                        ${this.generateResumeEntries(consultantData.resume)}
                     </div>
                 </div>` 
                 : "" 
