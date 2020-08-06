@@ -177,15 +177,13 @@ template.innerHTML = `
     }
     
     @media only screen and (max-width: 767px) {
-        #team-container {
-            grid-template-columns: 1fr;
-        }
-    }
-    
-    @media only screen and (max-width: 767px) {
         #member-card-container {
             grid-column: span 1;
             width: 100%;
+        }
+
+        #team-container {
+            grid-template-columns: 1fr;
         }
     }
     
@@ -299,6 +297,17 @@ const cardLoader = `
             transform: translateX(100%); 
         } 
     }
+
+    @media only screen and (max-width: 767px) {
+        #team-container-loader {
+            grid-template-columns: 1fr;
+        }
+    
+        #loader-member-container .loader-image-placeholder {
+            margin: 0;
+        }
+    }    
+
     </style>
     <div id="team-container-loader">
         <div class="loader-card-container">
