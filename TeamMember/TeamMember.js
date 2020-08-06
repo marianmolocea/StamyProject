@@ -433,13 +433,14 @@ class Team extends HTMLElement {
             let consultantId = this.getAttribute('consultant-id')
             consultantData = await this.getConsultantDto(consultantId)
             
-            this.shadowRoot.getElementById('team-member-container').replaceChild(document.createTextNode(`
-                <div id="team-member-avatar-container">
-                    <img src="// IMG URL //" alt="// ALT //" />
-                    <div id="team-member-avatar-name">// NAME //</div>
-                    <div id="team-member-avatar-title">// TITLE //</div>
-                </div>
-            `), this.shadowRoot.getElementById('loader-member-container'))
+            let node = new DOMParser().parseFromString(`
+            <div id="team-member-avatar-container">
+                <img src="// IMG URL //" alt="// ALT //" />
+                <div id="team-member-avatar-name">// NAME //</div>
+                <div id="team-member-avatar-title">// TITLE //</div>
+            </div>`, "text/html")
+
+            this.shadowRoot.getElementById('team-member-container').replaceChild(node, this.shadowRoot.getElementById('loader-member-container'))
 
             //Add image info to the template
             this.shadowRoot.querySelector('img').src = consultantData.imageUrl ? consultantData.imageUrl : this.replacementAvatarUrl;
