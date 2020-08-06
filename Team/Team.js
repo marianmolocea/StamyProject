@@ -215,12 +215,6 @@ template.innerHTML = `
         background-color: #05C46B;
     }
     </style>
-    <div class="button-container">
-        <button class="purple" onclick="pickColor(1)">Click me!</button>
-        <button class="orange" onclick="pickColor(2)">Click me!</button>
-        <button class="red" onclick="pickColor(3)">Click me!</button>
-        <button class="green" onclick="pickColor(4)">Click me!</button>
-    </div>
     <div id="team-container">
         <!-- Inject cards here -->
     </div>
