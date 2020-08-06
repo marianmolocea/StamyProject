@@ -4,7 +4,7 @@ let defaultColor = "#05C46B"
 let customColor = sessionStorage.getItem('customColor')
 
 const template = document.createElement('template');
-const cardLoader = document.createElement('template');
+//const cardLoader = document.createElement('template');
 
 //TEMPLATE BEGINNING
 
@@ -223,10 +223,10 @@ template.innerHTML = `
 
 //TEMPLATE END
 
-cardLoader.innerHTML = `
+cardLoader = `
     <style>
 
-    .team-container {
+    #team-container-loader {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 20px;
@@ -301,7 +301,7 @@ cardLoader.innerHTML = `
         } 
     }
     </style>
-    <div class="team-container">
+    <div id="team-container-loader">
         <div class="loader-card-container">
             <div class="loader-image-placeholder loading"></div>
             <div class="loader-description-container">
@@ -378,7 +378,7 @@ class Team extends HTMLElement {
 
     connectedCallback() {
         (async () => {
-            this.shadowRoot.appendChild(cardLoader.content.cloneNode(true));
+            this.shadowRoot.getElementById('team-container').insertAdjacentHTML('afterbegin', cardLoader);
 
             let team;
             // Get all team members from the API
@@ -386,7 +386,7 @@ class Team extends HTMLElement {
             
             //Inject the member cards
             team.forEach(member => this.shadowRoot.getElementById('team-container').insertAdjacentHTML('afterbegin', this.generateTemplate(member)))
-            this.shadowRoot.removeChild(cardLoader)
+            this.shadowRoot.getElementById('team-container').replaceChild(document.createTextNode(""), this.shadowRoot.getElementById('team-container-loader'))
         })()
     }
 }
