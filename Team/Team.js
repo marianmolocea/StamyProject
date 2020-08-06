@@ -274,9 +274,9 @@ class Team extends HTMLElement {
                 <div id="member-card-description-container">
                     <div id="member-card-description-name">${name}</div>
                     ${title ? `<div id="member-card-description-title">${title}</div>` : ""}
-                    ${traits && traits.length > 0 ? 
+                    ${intro ? 
                         `<div id="member-card-description-intro">
-                            ${traits[0].split('').slice(0, 120).join('') + "..."}
+                            ${intro.split('').slice(0, 120).join('') + "..."}
                         </div>` : ""}
                 </div>
                 <a href="details.html" id="member-card-button">SEE MORE</a>
