@@ -441,7 +441,7 @@ class Team extends HTMLElement {
 
             // TEMPLATE END
 
-            this.shadowRoot.getElementById('team-member-container').parentNode.replaceChild(document.createTextNode(""), this.shadowRoot.getElementById('loader-member-container'))
+            this.shadowRoot.getElementById('loader-member-container').parentNode.replaceChild(document.createTextNode(""), this.shadowRoot.getElementById('loader-member-container'))
             
             this.shadowRoot.appendChild(template.content.cloneNode(true));
             
