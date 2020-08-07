@@ -161,11 +161,11 @@ class Team extends HTMLElement {
 
     getCustomColor = async () => {
         // Add Color endpoint URL here
-        const endpoint = "http://www.colr.org/json/color/random";
+        const endpoint = "https://www.thecolorapi.com/id?hex=00ffa6";
         try {
             let response = await fetch(endpoint);
             let color = await response.json();
-            return color.new_color
+            return color.hex.value
         } catch (err) {
             console.log(err);
         }
