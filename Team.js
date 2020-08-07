@@ -165,7 +165,7 @@ class Team extends HTMLElement {
         try {
             let response = await fetch(endpoint);
             let color = await response.json();
-            return color.hex.value
+            sessionStorage.setItem('customColor', color.hex.value)
         } catch (err) {
             console.log(err);
         }
@@ -180,8 +180,9 @@ class Team extends HTMLElement {
             
             // Get all team members from the API
             let team = await this.getAllTeam() 
-            
-            let customColor =  await this.getCustomColor();
+
+            await this.getCustomColor();
+            let customColor = sessionStorage.getItem('customColor')
 
             //TEMPLATE BEGINNING
 
