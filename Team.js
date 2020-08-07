@@ -175,8 +175,8 @@ class Team extends HTMLElement {
         (async () => {
 
             
-            this.shadowRoot.innerHTML = cardLoader;
-            //this.shadowRoot.getElementById('team-container').insertAdjacentHTML('afterbegin', cardLoader);
+            //this.shadowRoot.innerHTML = cardLoader;
+            this.shadowRoot.getElementById('team-container').insertAdjacentHTML('afterbegin', cardLoader);
             
             // Get all team members from the API
             let team = await this.getAllTeam() 
@@ -402,7 +402,7 @@ class Team extends HTMLElement {
 
             //Inject the member cards
             team.forEach(member => this.shadowRoot.getElementById('team-container').insertAdjacentHTML('afterbegin', this.generateTemplate(member)))
-            this.shadowRoot.getElementById('team-container').replaceChild(document.createTextNode(""), this.shadowRoot.getElementById('team-container-loader'))
+            this.shadowRoot.getElementById('team-container-loader').replaceChild(document.createTextNode(""), this.shadowRoot.getElementById('team-container-loader'))
         })();
     }
 }
