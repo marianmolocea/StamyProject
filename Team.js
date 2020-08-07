@@ -154,14 +154,14 @@ class Team extends HTMLElement {
                 ${intro.split('').slice(0, 120).join('') + "..."}
                 </div>` : ""}
                 </div>
-                <a href="${id}" id="member-card-button">SEE MORE</a>
+                <a href="${"details.html" || id}" id="member-card-button">SEE MORE</a>
                 </div>`;
         return element;
     }
 
     getCustomColor = async () => {
         // Add Color endpoint URL here
-        const endpoint = "https://www.thecolorapi.com/id?hex=00ffa6";
+        const endpoint = "https://www.thecolorapi.com/id?hex=DC143C";
         try {
             let response = await fetch(endpoint);
             let color = await response.json();
@@ -173,16 +173,19 @@ class Team extends HTMLElement {
         
     connectedCallback() {
         (async () => {
-
             
             this.shadowRoot.innerHTML = cardLoader;
-            //this.shadowRoot.getElementById('team-container').insertAdjacentHTML('afterbegin', cardLoader);
             
             // Get all team members from the API
             let team = await this.getAllTeam() 
 
-            await this.getCustomColor();
-            let customColor = sessionStorage.getItem('customColor')
+            let customColor;
+            if(!sessionStorage.getItem('customColor')) {
+                await this.getCustomColor();
+                customColor = sessionStorage.getItem('customColor')
+            } else {
+                customColor = sessionStorage.getItem('customColor')
+            }
 
             //TEMPLATE BEGINNING
 
