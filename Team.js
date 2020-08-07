@@ -403,7 +403,7 @@ class Team extends HTMLElement {
 
             //Inject the member cards
             team.forEach(member => this.shadowRoot.getElementById('team-container').insertAdjacentHTML('afterbegin', this.generateTemplate(member)))
-            this.shadowRoot.getElementById('team-container-loader').parentNode.removeChild(document.createTextNode(""), this.shadowRoot.getElementById('team-container-loader'))
+            this.shadowRoot.getElementById('team-container-loader').parentNode.replaceChild(document.createTextNode(""), this.shadowRoot.getElementById('team-container-loader'))
         })();
     }
 }
