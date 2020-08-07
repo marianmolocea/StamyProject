@@ -181,7 +181,7 @@ class Team extends HTMLElement {
             // Get all team members from the API
             let team = await this.getAllTeam() 
             
-            customColor =  await this.getCustomColor();
+            let customColor =  await this.getCustomColor();
 
             //TEMPLATE BEGINNING
 
