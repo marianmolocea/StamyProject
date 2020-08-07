@@ -1,7 +1,7 @@
-let defaultColor = "#05C46B"
+let defaultColor = "#ffffff"
 
 //Change the sessionStorage with a color from the backend
-let customColor = sessionStorage.getItem('customColor')
+let customColor = defaultColor;
 
 const template = document.createElement('template');
 
@@ -354,6 +354,7 @@ class Team extends HTMLElement {
             let response = await fetch(endpoint);
             let data = await response.json();
             isLoaded = true;
+            sessionStorage.setItem('customColor', "#eb3b5a")
             return data
         } catch (err) {
             console.log(err);
@@ -362,7 +363,7 @@ class Team extends HTMLElement {
 
     generateTemplate = ({id,imageUrl, name, title, intro}) => {
 
-        let replacementAvatarUrl = "https://icon-library.com/images/default-user-icon/default-user-icon-8.jpg"
+        let replacementAvatarUrl = "https://icon-library.com/images/default-user-icon/default-user-icon-8.jpg";
     
         //Change the anchor tag href to the corresponding element.
         let element = `
@@ -387,8 +388,10 @@ class Team extends HTMLElement {
 
             let team;
             // Get all team members from the API
-            team = await this.getAllTeam()     
+            team = await this.getAllTeam() 
             
+            customColor = sessionStorage.getItem('customColor')
+
             //Inject the member cards
             team.forEach(member => this.shadowRoot.getElementById('team-container').insertAdjacentHTML('afterbegin', this.generateTemplate(member)))
             this.shadowRoot.getElementById('team-container').replaceChild(document.createTextNode(""), this.shadowRoot.getElementById('team-container-loader'))
