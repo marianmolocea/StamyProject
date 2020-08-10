@@ -176,14 +176,18 @@ class Team extends HTMLElement {
             
             this.shadowRoot.innerHTML = cardLoader;
             
+            let customColorAttr = this.getAttribute('custom-color');
+            
             // Get all team members from the API
-            let team = await this.getAllTeam() 
+            let team = await this.getAllTeam();
 
             let customColor;
-            if(!sessionStorage.getItem('customColor')) {
-                await this.getCustomColor();
+            if(customColorAttr) {
+                customColor = customColorAttr;
+            } else if (sessionStorage.getItem('customColor')) {
                 customColor = sessionStorage.getItem('customColor')
             } else {
+                await this.getCustomColor();
                 customColor = sessionStorage.getItem('customColor')
             }
 

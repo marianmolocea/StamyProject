@@ -190,22 +190,36 @@ class Team extends HTMLElement {
     
     replacementAvatarUrl = "https://icon-library.com/images/default-user-icon/default-user-icon-8.jpg"
     
+    getCustomColor = async () => {
+        // Add Color endpoint URL here
+        const endpoint = "https://www.thecolorapi.com/id?hex=DC143C";
+        try {
+            let response = await fetch(endpoint);
+            let color = await response.json();
+            sessionStorage.setItem('customColor', color.hex.value)
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
     connectedCallback() {
         let consultantData;
         (async () => {
 
             this.shadowRoot.innerHTML = cardLoader;
-            //this.shadowRoot.getElementById('team-member-container').insertAdjacentHTML('beforebegin', cardLoader);
 
             // Get consultant data from the API
-            let consultantId = this.getAttribute('consultant-id')
+            let consultantId = this.getAttribute('consultant-id');
+            let customColorAttr = this.getAttribute('custom-color');
             consultantData = await this.getConsultantDto(consultantId)
 
             let customColor;
-            if(!sessionStorage.getItem('customColor')) {
-                await this.getCustomColor();
+            if(customColorAttr) {
+                customColor = customColorAttr;
+            } else if (sessionStorage.getItem('customColor')) {
                 customColor = sessionStorage.getItem('customColor')
             } else {
+                await this.getCustomColor();
                 customColor = sessionStorage.getItem('customColor')
             }
 
